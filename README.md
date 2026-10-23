@@ -72,8 +72,8 @@ module "authentik" {
 
 | Name | Description |
 | ---- | ----------- |
-| <a name="output_alb"></a> [alb](#output\_alb) | n/a |
-| <a name="output_ecs"></a> [ecs](#output\_ecs) | n/a |
-| <a name="output_rds"></a> [rds](#output\_rds) | n/a |
-| <a name="output_rds_security_group"></a> [rds\_security\_group](#output\_rds\_security\_group) | n/a |
-| <a name="output_vpc"></a> [vpc](#output\_vpc) | n/a |
+| <a name="output_alb"></a> [alb](#output\_alb) | alb module output from https://registry.terraform.io/modules/terraform-aws-modules/alb/aws/latest?tab=outputs |
+| <a name="output_ecs"></a> [ecs](#output\_ecs) | ecs module output from https://registry.terraform.io/modules/terraform-aws-modules/ecs/aws/latest?tab=outputs |
+| <a name="output_rds"></a> [rds](#output\_rds) | rds module output from https://registry.terraform.io/modules/terraform-aws-modules/rds/aws/latest?tab=outputs |
+| <a name="output_rds_security_group"></a> [rds\_security\_group](#output\_rds\_security\_group) | rds security group module output from https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/latest?tab=outputs |
+| <a name="output_vpc"></a> [vpc](#output\_vpc) | vpc module output from https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/latest?tab=outputs |
