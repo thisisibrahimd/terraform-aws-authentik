@@ -29,9 +29,9 @@ content: |-
     source = "thisisibrahimd/terraform-aws-authentik"
   
   }
+  ```
 
   {{ .Content }}
-  ```
   
 output:
   file: ""

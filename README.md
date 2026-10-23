@@ -9,6 +9,7 @@ module "authentik" {
   source = "thisisibrahimd/terraform-aws-authentik"
 
 }
+```
 
 ## Requirements
 
@@ -76,4 +77,3 @@ module "authentik" {
 | <a name="output_rds"></a> [rds](#output\_rds) | n/a |
 | <a name="output_rds_security_group"></a> [rds\_security\_group](#output\_rds\_security\_group) | n/a |
 | <a name="output_vpc"></a> [vpc](#output\_vpc) | n/a |
-```
