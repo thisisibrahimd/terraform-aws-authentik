@@ -1,3 +1,5 @@
 [tools]
 "github:miniscruff/changie" = "latest"
 "github:terraform-docs/terraform-docs" = "latest"
+go = "latest"
+opentofu = "latest"
