@@ -66,7 +66,7 @@ module "rds" {
   db_subnet_group_name   = module.vpc[0].database_subnet_group
   subnet_ids             = module.vpc[0].database_subnets
 
-  multi_az = false
+  multi_az = var.rds_multi_az
 
   publicly_accessible = false
 

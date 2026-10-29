@@ -30,6 +30,12 @@ variable "rds_instance_type" {
   description = "RDS PostfreSQL instacne type  (without the leading db.)"
 }
 
+variable "rds_multi_az" {
+  type        = bool
+  default     = false
+  description = "Specifies if the RDS instance is multi-AZ"
+}
+
 variable "rds_version" {
   type        = string
   default     = "17.5"
