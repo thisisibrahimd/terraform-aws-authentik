@@ -95,13 +95,13 @@ module "sg_rds" {
       from_port                    = 5432
       ip_protocol                  = "tcp"
       description                  = "Allow authentik server to connect to RDS"
-      referenced_security_group_id = module.ecs[0].services["server"].security_group_id
+      referenced_security_group_id = module.ecs[0].services["authentik-server"].security_group_id
     }
     allow-authentik-worker = {
       from_port                    = 5432
       ip_protocol                  = "tcp"
       description                  = "Allow authentik worker to connect to RDS"
-      referenced_security_group_id = module.ecs[0].services["worker"].security_group_id
+      referenced_security_group_id = module.ecs[0].services["authentik-worker"].security_group_id
     }
   }
 
@@ -154,7 +154,7 @@ module "alb" {
       from_port                    = 9000
       to_port                      = 9000
       description                  = "Load balancer to target group"
-      referenced_security_group_id = module.ecs[0].services["server"].security_group_id
+      referenced_security_group_id = module.ecs[0].services["authentik-server"].security_group_id
     }
   }
 
@@ -246,7 +246,7 @@ module "ecs" {
   vpc_id                      = module.vpc[0].vpc_id
 
   services = {
-    server = {
+    authentik-server = {
       enable_ecs_managed_tags   = true
       create_tasks_iam_role     = true
       create_task_exec_iam_role = true
@@ -336,7 +336,7 @@ module "ecs" {
         }
       }
     }
-    worker = {
+    authentik-worker = {
       enable_ecs_managed_tags   = true
       create_tasks_iam_role     = true
       create_task_exec_iam_role = true
