@@ -120,6 +120,56 @@ module "sg_rds" {
 # ALB
 ################################################################################
 
+locals {
+  certificate_provided = var.certificate_arn != "" && var.certificate_arn != null
+
+  alb_listeners = {
+    ex-http = {
+      certificate_required = false
+      config = {
+        
+      port     = 80
+      protocol = "HTTP"
+      forward = {
+        target_group_key = "tg-authentik"
+      }
+      }
+    }
+    ex-http-https-redirect = {
+      certificate_required = true
+      config = {
+        
+      port     = 80
+      protocol = "HTTP"
+      redirect = {
+        port        = "443"
+        protocol    = "HTTPS"
+        status_code = "HTTP_301"
+      }
+      }
+    }
+    ex-https = {
+      certificate_required = true
+      config = {
+        
+      port            = 443
+      protocol        = "HTTPS"
+      certificate_arn = var.certificate_arn
+      forward = {
+        target_group_key = "tg-authentik"
+      }
+      }
+    }
+  }
+
+  alb_listeners_enabled = {
+      for k, v in local.alb_listeners : k => v.config
+      if v.certificate_required == local.certificate_provided
+    
+  }
+  
+}
+
 module "alb" {
   count = var.create ? 1 : 0
 
@@ -158,26 +208,7 @@ module "alb" {
     }
   }
 
-  listeners = {
-    ex-http-https-redirect = {
-      port     = 80
-      protocol = "HTTP"
-      redirect = {
-        port        = "443"
-        protocol    = "HTTPS"
-        status_code = "HTTP_301"
-      }
-    }
-    ex-https = {
-      port            = 443
-      protocol        = "HTTPS"
-      certificate_arn = var.certificate_arn
-
-      forward = {
-        target_group_key = "tg-authentik"
-      }
-    }
-  }
+  listeners = local.alb_listeners_enabled
 
   target_groups = {
     tg-authentik = {
